@@ -12,7 +12,7 @@ to HAProxy, which sets the server's weight in the load balancer to half of what 
    GOOS=linux GOARCH=amd64 go build -v -o ./agent .
    ```
 
-2. Copy the `agent` program to your webserver and run it:
+1. Copy the `agent` program to your webserver and run it:
 
    ```bash
    ./agent
@@ -21,7 +21,7 @@ to HAProxy, which sets the server's weight in the load balancer to half of what 
 
 ## Demo
 
-2. Build and run the demo using Docker Compose:
+1. Build and run the demo using Docker Compose:
 
    ```bash
    cd demo
@@ -31,13 +31,13 @@ to HAProxy, which sets the server's weight in the load balancer to half of what 
 
    This hosts a website at http://localhost. You can see the HAProxy Stats page at http://localhost:8404.
 
-3. To artifically increase CPU usage on the webserver, run the `stress-ng` command:
+1. To artifically increase CPU usage on the webserver, run the `stress-ng` command:
 
    ```
    sudo docker-compose exec webserver1 stress-ng --cpu 8 --timeout 20
    ```
 
-4. Watch the HAProxy Stats page at http://localhost:8404/ to see the server's weight change.
+1. Watch the HAProxy Stats page at http://localhost:8404/ to see the server's weight change.
 
    You can also change the action that HAProxy takes. For example, change the **agent.go** code
    so that it sets the server to *up* or *down*:
