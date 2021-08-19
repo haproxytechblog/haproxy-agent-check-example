@@ -1,0 +1,33 @@
+version: "3"
+
+networks:
+  mynet:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.25.0.0/24
+
+services:
+  webserver1:
+    image: demo/haproxy-agent:latest
+    build: ../src
+    volumes:
+      - "./index.html:/usr/share/nginx/html/index.html:ro"
+    networks:
+      mynet:
+        ipv4_address: 172.25.0.10
+
+  # load balancer
+  haproxy:
+    image: haproxytech/haproxy-ubuntu:2.4
+    networks:
+      mynet:
+        ipv4_address: 172.25.0.11
+    hostname: haproxy1
+    volumes:
+      - "./haproxy.cfg:/etc/haproxy/haproxy.cfg"
+    ports:
+      - "80:80"
+      - "8404:8404"
+    depends_on:
+      - webserver1

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <h1>HAProxy Agent Health Check Demo</h1>
+         
+        <p>Check the <a href="http://localhost:8404/">HAProxy Stats page</a>.</p>
+
+        <p>
+            To artifically increase CPU usage on the webserver, run the <code>stress-ng</code> command:
+        </p>
+
+        <pre>sudo docker-compose exec webserver1 stress-ng --cpu 8 --timeout 20</pre>
+
+        <p>
+           The agent will change the server's weight in HAProxy to 50%.
+        </p>
+    </body>
+</html>
